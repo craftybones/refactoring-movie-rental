@@ -23,4 +23,14 @@ public class CustomerTest {
         assertEquals(3.5,john.amountPerRental(rental),0.0);
     }
 
+    @Test
+    public void testAmountPerNewMovieRental() {
+        Movie avatar = new Movie("Avatar", Movie.NEW_RELEASE);
+        Rental rental = new Rental(avatar, 1);
+        Customer john = new Customer("John");
+
+        assertEquals(3,john.amountPerRental(rental),0.0);
+    }
+
+
 }
