@@ -21,4 +21,9 @@ public class RegularMovie extends Movie {
         int extraDays=daysRented-2;
         return extraDays>0?extraDays:0;
     }
+
+    @Override
+    public int frequentRenterPoints(int daysRented) {
+        return 1;
+    }
 }

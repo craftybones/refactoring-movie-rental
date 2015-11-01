@@ -48,6 +48,15 @@ public class CustomerTest {
     }
 
     @Test
+    public void testStatementForSingleNewMovieRentalOverMultipleDays() throws Exception {
+        customer.addRental(new Rental(newRelease,2));
+        assertEquals("Rental Record for John\n" +
+                "\tAvatar\t6.0\n" +
+                "Amount owed is 6.0\n" +
+                "You earned 2 frequent renter points",customer.statement());
+    }
+
+    @Test
     public void testStatementForSingleChildrensMovieRental() throws Exception {
         customer.addRental(new Rental(childrens,1));
         assertEquals("Rental Record for John\n" +

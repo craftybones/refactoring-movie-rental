@@ -16,4 +16,5 @@ public class NewMovieTest {
         NewMovie movie = new NewMovie("Avatar");
         assertEquals(9, movie.getPrice(3), 0);
     }
+
 }
