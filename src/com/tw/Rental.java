@@ -25,4 +25,8 @@ public class Rental {
     public int frequentRenterPoints() {
         return movie.frequentRenterPoints(daysRented);
     }
+
+    public String getTitle() {
+        return movie.getTitle();
+    }
 }

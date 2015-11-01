@@ -5,7 +5,7 @@ import java.util.List;
 public class Customer {
 
     private String name;
-    private List<Rental> rentals = new ArrayList<Rental>();
+    private Rentals rentals = new Rentals();
 
     public Customer(String name) {
         this.name = name;
@@ -19,26 +19,22 @@ public class Customer {
         return name;
     }
 
-    public String statement() {
+    public String statement(IStatementFormatter formatter) {
+        double thisAmount = 0;
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        String result = "Rental Record for " + getName() + "\n";
 
-        double thisAmount = 0;
+        formatter.customerName(getName());
+
         for (Rental rental: rentals) {
-            thisAmount += rental.amount();
+            thisAmount = rental.amount();
             frequentRenterPoints += rental.frequentRenterPoints();
-
-            // show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
+            formatter.addRental(rental.getTitle(),thisAmount);
             totalAmount += thisAmount;
         }
 
-        // add footer lines
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
-
-        return result;
+        formatter.footer(totalAmount,frequentRenterPoints);
+        return formatter.statement();
     }
 
 }

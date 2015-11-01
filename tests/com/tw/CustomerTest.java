@@ -11,6 +11,7 @@ public class CustomerTest {
     private Movie newRelease;
     private Movie childrens;
     private Customer customer;
+    private DefaultStatementFormatter formatter;
 
     @Before
     public void setUp() throws Exception {
@@ -18,6 +19,7 @@ public class CustomerTest {
         newRelease = new NewMovie("Avatar");
         childrens = new ChildrensMovie("Toy Story");
         customer = new Customer("John");
+        formatter = new DefaultStatementFormatter();
     }
 
     @Test
@@ -26,7 +28,7 @@ public class CustomerTest {
         assertEquals("Rental Record for John\n" +
                 "\tTop Gun\t2.0\n" +
                 "Amount owed is 2.0\n" +
-                "You earned 1 frequent renter points",customer.statement());
+                "You earned 1 frequent renter points",customer.statement(formatter));
     }
 
     @Test
@@ -35,7 +37,7 @@ public class CustomerTest {
         assertEquals("Rental Record for John\n" +
                 "\tTop Gun\t3.5\n" +
                 "Amount owed is 3.5\n" +
-                "You earned 1 frequent renter points",customer.statement());
+                "You earned 1 frequent renter points",customer.statement(formatter));
     }
 
     @Test
@@ -44,7 +46,7 @@ public class CustomerTest {
         assertEquals("Rental Record for John\n" +
                 "\tAvatar\t3.0\n" +
                 "Amount owed is 3.0\n" +
-                "You earned 1 frequent renter points",customer.statement());
+                "You earned 1 frequent renter points",customer.statement(formatter));
     }
 
     @Test
@@ -53,7 +55,7 @@ public class CustomerTest {
         assertEquals("Rental Record for John\n" +
                 "\tAvatar\t6.0\n" +
                 "Amount owed is 6.0\n" +
-                "You earned 2 frequent renter points",customer.statement());
+                "You earned 2 frequent renter points",customer.statement(formatter));
     }
 
     @Test
@@ -62,7 +64,7 @@ public class CustomerTest {
         assertEquals("Rental Record for John\n" +
                 "\tToy Story\t1.5\n" +
                 "Amount owed is 1.5\n" +
-                "You earned 1 frequent renter points",customer.statement());
+                "You earned 1 frequent renter points",customer.statement(formatter));
     }
 
     @Test
@@ -71,7 +73,7 @@ public class CustomerTest {
         assertEquals("Rental Record for John\n" +
                 "\tToy Story\t3.0\n" +
                 "Amount owed is 3.0\n" +
-                "You earned 1 frequent renter points",customer.statement());
+                "You earned 1 frequent renter points",customer.statement(formatter));
     }
 
     @Test
@@ -81,10 +83,10 @@ public class CustomerTest {
         customer.addRental(new Rental(newRelease,1));
         assertEquals("Rental Record for John\n" +
                 "\tTop Gun\t2.0\n" +
-                "\tToy Story\t3.5\n" +
-                "\tAvatar\t6.5\n" +
-                "Amount owed is 12.0\n" +
-                "You earned 3 frequent renter points", customer.statement());
+                "\tToy Story\t1.5\n" +
+                "\tAvatar\t3.0\n" +
+                "Amount owed is 6.5\n" +
+                "You earned 3 frequent renter points", customer.statement(formatter));
     }
 
     @Test
@@ -94,10 +96,10 @@ public class CustomerTest {
         customer.addRental(new Rental(newRelease,1));
         assertEquals("Rental Record for John\n" +
                 "\tTop Gun\t3.5\n" +
-                "\tToy Story\t6.5\n" +
-                "\tAvatar\t9.5\n" +
-                "Amount owed is 19.5\n" +
-                "You earned 3 frequent renter points", customer.statement());
+                "\tToy Story\t3.0\n" +
+                "\tAvatar\t3.0\n" +
+                "Amount owed is 9.5\n" +
+                "You earned 3 frequent renter points", customer.statement(formatter));
     }
 
 
