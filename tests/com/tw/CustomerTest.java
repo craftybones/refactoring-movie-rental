@@ -30,6 +30,15 @@ public class CustomerTest {
     }
 
     @Test
+    public void testStatementForSingleRegularMovieRentalWithLateDues() throws Exception {
+        customer.addRental(new Rental(regular,3));
+        assertEquals("Rental Record for John\n" +
+                "\tTop Gun\t3.5\n" +
+                "Amount owed is 3.5\n" +
+                "You earned 1 frequent renter points",customer.statement());
+    }
+
+    @Test
     public void testStatementForSingleNewMovieRental() throws Exception {
         customer.addRental(new Rental(newRelease,1));
         assertEquals("Rental Record for John\n" +
@@ -47,25 +56,40 @@ public class CustomerTest {
                 "You earned 1 frequent renter points",customer.statement());
     }
 
-
     @Test
-    public void testAmountPerRegularMovieRental() {
-        Rental rental = new Rental(regular, 1);
-
-        assertEquals(2,customer.amountPerRental(rental),0.0);
+    public void testStatementForSingleChildrensMovieRentalWithLateDues() throws Exception {
+        customer.addRental(new Rental(childrens,4));
+        assertEquals("Rental Record for John\n" +
+                "\tToy Story\t3.0\n" +
+                "Amount owed is 3.0\n" +
+                "You earned 1 frequent renter points",customer.statement());
     }
 
     @Test
-    public void testAmountPerRegularMovieRentalWithLateDues() {
-        Rental rental = new Rental(regular, 3);
-
-        assertEquals(3.5,customer.amountPerRental(rental),0.0);
+    public void testStatementForMultipleRentals() throws Exception {
+        customer.addRental(new Rental(regular,1));
+        customer.addRental(new Rental(childrens,1));
+        customer.addRental(new Rental(newRelease,1));
+        assertEquals("Rental Record for John\n" +
+                "\tTop Gun\t2.0\n" +
+                "\tToy Story\t3.5\n" +
+                "\tAvatar\t6.5\n" +
+                "Amount owed is 12.0\n" +
+                "You earned 3 frequent renter points", customer.statement());
     }
 
     @Test
-    public void testAmountPerNewMovieRental() {
-        Rental rental = new Rental(newRelease, 1);
-
-        assertEquals(3,customer.amountPerRental(rental),0.0);
+    public void testStatementForMultipleRentalsWithLateDues() throws Exception {
+        customer.addRental(new Rental(regular,3));
+        customer.addRental(new Rental(childrens,4));
+        customer.addRental(new Rental(newRelease,1));
+        assertEquals("Rental Record for John\n" +
+                "\tTop Gun\t3.5\n" +
+                "\tToy Story\t6.5\n" +
+                "\tAvatar\t9.5\n" +
+                "Amount owed is 19.5\n" +
+                "You earned 3 frequent renter points", customer.statement());
     }
+
+
 }
