@@ -28,7 +28,7 @@ public class Customer {
         for (Rental rental: rentals) {
 
             //determine amounts for each line
-            thisAmount += rental.amountPerRental();
+            thisAmount += rental.amount();
 
             // add frequent renter points
             frequentRenterPoints++;

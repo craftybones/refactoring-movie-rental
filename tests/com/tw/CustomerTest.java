@@ -14,9 +14,9 @@ public class CustomerTest {
 
     @Before
     public void setUp() throws Exception {
-        regular = new Movie("Top Gun", Movie.REGULAR);
-        newRelease = new Movie("Avatar", Movie.NEW_RELEASE);
-        childrens = new Movie("Toy Story", Movie.CHILDRENS);
+        regular = new RegularMovie("Top Gun");
+        newRelease = new NewMovie("Avatar");
+        childrens = new ChildrensMovie("Toy Story");
         customer = new Customer("John");
     }
 
